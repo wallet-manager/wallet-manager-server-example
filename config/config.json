@@ -1,0 +1,17 @@
+{
+    "identity": {
+        "privateKey": "PRIVATE_KEY",
+        "publicKey": "PUBLIC_KEY",
+        "address": "ADDRESS"
+    },
+    "serverConfig": {
+        "serverPort": 8080,
+        "messageExpiredInMs": 6000000
+    },
+    "clientConfig": {
+        "instanceId": 1,
+        "baseURL": "http://18.143.36.162:8095/access",
+        "contentTypeJson": false
+    }
+    
+}
