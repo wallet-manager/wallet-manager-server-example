@@ -4,12 +4,12 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "yarn build && node ./dist/index.js",
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js",
     "test": "npx mocha",
     "release": "standard-version && git push --follow-tags && npm publish",
-    "webpack": "./node_modules/.bin/webpack --config ./webpack/webpack.js",
-    "dist": "yarn webpack && node ./dist/webpack/wallet-manager-server-example.js"
+    "build": "npm run compile && ./node_modules/.bin/webpack --config ./webpack/webpack.js",
+    "serve": "node ./dist/webpack/wallet-manager-server-example.js"
   },
   "repository": {
     "type": "git",
