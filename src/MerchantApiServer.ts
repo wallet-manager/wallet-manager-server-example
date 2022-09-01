@@ -1,5 +1,5 @@
 
-import {CONFIG, WalletManagerUtils} from "wallet-manager-client-utils";
+import {CONFIG} from "wallet-manager-client-utils";
 import {WalletManagerClient} from "wallet-manager-client/dist";
 import { default as express, Request, Response } from 'express';
 import {ExpressVerifier} from "wallet-manager-client-utils/dist/src/utils/ExpressVerifier";
@@ -13,7 +13,7 @@ const app = express();
 const {identity} = CONFIG;
 const {privateKey} = identity;
 const {clientConfig} = CONFIG;
-const {serverPort} = CONFIG.serverConfig;
+const {serverPort, whiteListedAddresses} = CONFIG.serverConfig;
 
 
 const client: WalletManagerClient = new WalletManagerClient(privateKey, clientConfig);
@@ -23,7 +23,7 @@ identity.publicKey = identity.publicKey || utils.publicKey;
 identity.address = identity.address || utils.address;
 
 
-const verifier = new ExpressVerifier(utils);
+const verifier = new ExpressVerifier(utils, whiteListedAddresses);
 
 app.get("/keys", (req:Request, res:Response) => {
     res.json(identity);
