@@ -4,7 +4,7 @@ const router = express.Router();
 import { loggerFactory } from "../utils/Logger"
 const logger = loggerFactory("MerchantApiServer");
 
-import { extractHeaderAndBody } from "../utils/HttpUtils";
+import { extractHeaderAndBody, handleError} from "../utils/HttpUtils";
 
 export function MerchantRouter() {
     router.post("/echo", (req: Request, res: Response) => {
@@ -37,21 +37,35 @@ export function MerchantRouter() {
     }
 
     router.post("/deposit_status", (req: Request, res: Response) => {
-        const headerAndBody = extractHeaderAndBody(req);
-        logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
-        randomResponse(res);
+        try{
+            const headerAndBody = extractHeaderAndBody(req);
+            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
+            randomResponse(res);
+        }catch(e){
+            handleError(res, e);
+        }
+
     });
 
     router.post("/operation_status", (req: Request, res: Response) => {
-        const headerAndBody = extractHeaderAndBody(req);
-        logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
-        randomResponse(res);
+        try{
+            const headerAndBody = extractHeaderAndBody(req);
+            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
+            randomResponse(res);
+        }catch(e){
+            handleError(res, e);
+        }
     });
 
     router.post("/operation_batch_status", (req: Request, res: Response) => {
-        const headerAndBody = extractHeaderAndBody(req);
-        logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
-        randomResponse(res);
+        try {
+            const headerAndBody = extractHeaderAndBody(req);
+            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
+            randomResponse(res);
+        }catch(e){
+            handleError(res, e);
+        }
+
     });
 
     return router;

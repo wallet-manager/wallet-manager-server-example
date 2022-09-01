@@ -1,6 +1,7 @@
 import {Constants, Header} from "wallet-manager-client-utils";
-import { Request } from 'express';
-
+import { Request, Response } from 'express';
+import { loggerFactory } from "../utils/Logger"
+const logger = loggerFactory("HttpUtils");
 
 export function extractHeader(req:Request): Header{
     const address = req.header(Constants.HEADER_ADDRESS);
@@ -23,4 +24,9 @@ export function extractHeaderAndBody(req:Request){
     const header:Header = extractHeader(req);
     const body = req.body || {};
     return {header, body};
+}
+
+export function handleError(res:Response, error:any){
+    logger.error("Error", error);
+    res.status(500).json({ error: {code:500, message:"Internal Error",data:error} });
 }
