@@ -57,8 +57,9 @@ export function AccessRouter(client: WalletManagerClient) {
     });
 
     // query deposit by address
-    router.get('/:chain_type/:chain_id/transfer/addr/:wallet_address/deposit/:asset_name', async (req, res) => {
+    router.get('/:chain_type/:chain_id/transfer/addr/:address/deposit/:asset_name', async (req, res) => {
         try{
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const params: any = { ...req.params, ...req.query };
             logRequest("Query deposit by address", params);
             const response = await client.getDepositByAddress(params);
@@ -72,6 +73,7 @@ export function AccessRouter(client: WalletManagerClient) {
     // query deposit by hash
     router.get('/:chain_type/:chain_id/transfer/hash/:tx_hash/deposit', async (req, res) => {
         try{
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const params: any = { ...req.params, ...req.query };
             logRequest("Query deposit by hash ", params);
             const response = await client.getDepositByHash(params);
@@ -86,6 +88,7 @@ export function AccessRouter(client: WalletManagerClient) {
     // query withdraw by merchant order id
     router.get('/withdraw/order/:merchant_order_id', async (req, res) => {
         try{
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const params: any = { ...req.params, ...req.query };
             logRequest("Query withdraw by merchant order id", params);
             const response = await client.getWithdrawByOrderId(params);
@@ -99,6 +102,7 @@ export function AccessRouter(client: WalletManagerClient) {
     // query withdraw by batch id
     router.get('/withdraw/batch/:batch_id', async (req, res) => {
         try{
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const params: any = { ...req.params, ...req.query };
             logRequest("Query withdraw by batch id", params);
             const response = await client.getWithdrawByOrderId(params);
