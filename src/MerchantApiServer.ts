@@ -1,5 +1,6 @@
 
-import {CONFIG} from "wallet-manager-client-utils";
+import {Config, loadConfig} from "wallet-manager-client-utils";
+const CONFIG = loadConfig<Config>('config');
 import {WalletManagerClient} from "wallet-manager-client/dist";
 import { default as express, Request, Response } from 'express';
 import {ExpressVerifier} from "wallet-manager-client-utils/dist/src/utils/ExpressVerifier";
