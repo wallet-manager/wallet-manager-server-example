@@ -36,28 +36,7 @@ export function MerchantRouter() {
         }
     }
 
-    router.post("/deposit_status", (req: Request, res: Response) => {
-        try{
-            const headerAndBody = extractHeaderAndBody(req);
-            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
-            randomResponse(res);
-        }catch(e){
-            handleError(res, e);
-        }
-
-    });
-
-    router.post("/operation_status", (req: Request, res: Response) => {
-        try{
-            const headerAndBody = extractHeaderAndBody(req);
-            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
-            randomResponse(res);
-        }catch(e){
-            handleError(res, e);
-        }
-    });
-
-    router.post("/operation_batch_status", (req: Request, res: Response) => {
+    const handler = (req: Request, res: Response) => {
         try {
             const headerAndBody = extractHeaderAndBody(req);
             logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
@@ -65,8 +44,17 @@ export function MerchantRouter() {
         }catch(e){
             handleError(res, e);
         }
+    };
 
-    });
+    router.post("/deposit_status", handler);
+
+    router.post("/operation_status", handler);
+
+    router.post("/operation_batch_status", handler);
+
+    router.post("/", handler);
+
+    router.post("/all",handler);
 
     return router;
 }
