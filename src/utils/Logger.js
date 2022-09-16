@@ -1,5 +1,6 @@
 
-import {CONFIG} from "wallet-manager-client-utils";
+import {loadConfig} from "wallet-manager-client-utils";
+const CONFIG = loadConfig('config');
 import { createLogger, format, transports}  from 'winston';
 const { combine, timestamp, label, printf, errors} = format;
 import path from "path";
