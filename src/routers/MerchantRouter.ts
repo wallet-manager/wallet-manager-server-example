@@ -46,13 +46,27 @@ export function MerchantRouter() {
         }
     };
 
+    const handlerVerify = (req: Request, res: Response) => {
+        try {
+            const headerAndBody = extractHeaderAndBody(req);
+            logger.info(`${req.url} - ${req.method} ${JSON.stringify(headerAndBody, null, 2)}`);
+            if (headerAndBody?.body?.type == 'verify_withdraw_transaction' && headerAndBody?.body?.data?.client_data?.includes('false')){
+                res.json({ result: false });
+            } else {
+                res.json({ result: true });
+            }
+        }catch(e){
+            handleError(res, e);
+        }
+    };
+
     router.post("/deposit_status", handler);
 
     router.post("/operation_status", handler);
 
     router.post("/operation_batch_status", handler);
 
-    router.post("/", handler);
+    router.post("/", handlerVerify);
 
     router.post("/all",handler);
 
